@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sytle.css">
+    <title>Quizz</title>
+</head>
+<body>
+<div class="themes">
+    <h1>Theme</h1>
+    <div id="listetheme">
+    </div>
+    <div class="nombrequestion">
+        <label for="nbquestions">Nombre de questions : </label>
+
+        <input type="number" id="nbquestions" name="nbquestions" required>
+            <input id="sumbit" type="submit" value="Commencer le quizz">
+    </div>
+</div>
+<div class="quizzalign" style="display: none">
+    <h1>Questionnaire</h1>
+    <div class="quizz">
+        <h4 id="nombreQuestion"></h4>
+        <h2 id="question"></h2>
+
+        <div class="reponse">
+            <div class="proposition">
+                <input onclick="activerBouton()" type="radio" id="1" name="radio">
+                <label id="reponse1" for="1"></label>
+            </div>
+            <div class="proposition">
+                <input onclick="activerBouton()" type="radio" id="2" name="radio">
+                <label id="reponse2" for="2"></label>
+
+            </div>
+            <div class="proposition">
+                <input onclick="activerBouton()" type="radio" id="3" name="radio">
+                <label id="reponse3" for="3"></label>
+
+            </div>
+            <div class="proposition">
+                <input onclick="activerBouton()" type="radio" id="4" name="radio">
+                <label id="reponse4" for="4"></label>
+            </div>
+        </div>
+        <button id="valider" type="submit">Valider</button>
+
+    </div>
+</div>
+<div id="affifin" style="display: none;">
+    <div class="box">
+        <h1 id="score"></h1>
+        <button id="restard" onclick="restart()">Recommencer</button>
+    </div>
+</div>
+    <script src="app.js"></script>
+</body>
+</html>
