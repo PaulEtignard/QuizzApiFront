@@ -47,6 +47,9 @@ const displayThemes = (themes) =>{
         listetheme.appendChild(div)
     })
 }
+//création d'un tableau pour stocker les réponses correctes
+let ReponsesCorrectes = []
+let ReponsesChoisies = []
 
 const confirmButton = document.querySelector("#sumbit")
 confirmButton.addEventListener("click",e=>{
@@ -75,32 +78,48 @@ const AfficherQuestions = (questions) =>{
 
 
     const chargerQuestion = (question) =>{
-        questionPrint.innerText = question.insitutle
+        questionPrint.innerText = question.intitule
         nbquestionsaffi.innerText = `question : ${questionActuelle+1}/${nbquestiondispo}`
-        reponse1.innerText = question.reponse[0]
-        reponse2.innerText = question.reponse[1]
-        reponse3.innerText = question.reponse[2]
-        reponse4.innerText = question.reponse[3]
+        reponse1.innerText = question.reponses[0].intitule
+        reponse2.innerText = question.reponses[1].intitule
+        reponse3.innerText = question.reponses[2].intitule
+        reponse4.innerText = question.reponses[3].intitule
     }
     let nbquestiondispo = questions.length
     chargerQuestion(questions[questionActuelle])
     desactiverBouton()
     let reponseActuelle = ""
     boutonValider.addEventListener("click",e=>{
+        if (questions[questionActuelle].reponses[0].isCOrrect){
+            ReponsesCorrectes.push(questions[questionActuelle].reponses[0].intitule)
+        }
+        if (questions[questionActuelle].reponses[1].isCOrrect){
+            ReponsesCorrectes.push(questions[questionActuelle].reponses[1].intitule)
+        }
+        if (questions[questionActuelle].reponses[2].isCOrrect){
+            ReponsesCorrectes.push(questions[questionActuelle].reponses[2].intitule)
+        }
+        if (questions[questionActuelle].reponses[3].isCOrrect){
+            ReponsesCorrectes.push(questions[questionActuelle].reponses[3].intitule)
+        }
         if (checker1.checked || checker2.checked || checker3.checked || checker4.checked ){
             if (checker1.checked){
-                reponseActuelle = reponse1.innerHTML
+                reponseActuelle = questions[questionActuelle].reponses[0].isCOrrect
+                ReponsesChoisies.push(questions[questionActuelle].reponses[0].intitule)
             }
             if (checker2.checked){
-                reponseActuelle = reponse2.innerText
+                reponseActuelle = questions[questionActuelle].reponses[1].isCOrrect
+                ReponsesChoisies.push(questions[questionActuelle].reponses[1].intitule)
             }
             if (checker3.checked){
-                reponseActuelle = reponse3.innerText
+                reponseActuelle = questions[questionActuelle].reponses[2].isCOrrect
+                ReponsesChoisies.push(questions[questionActuelle].reponses[2].intitule)
             }
             if (checker4.checked){
-                reponseActuelle = reponse4.innerText
+                reponseActuelle = questions[questionActuelle].reponses[3].isCOrrect
+                ReponsesChoisies.push(questions[questionActuelle].reponses[3].intitule)
             }
-            if (reponseActuelle ===questions[questionActuelle].reponseCorrecte ){
+            if (reponseActuelle ){
                 pointstotal = pointstotal+1
             }
             console.log(pointstotal)
@@ -134,9 +153,47 @@ const AfficherQuestions = (questions) =>{
 const chargerFinQuizz =(pointstotal, nbquestiondispo) =>{
     let affiFin = document.querySelector("#affifin")
     let affiscore = document.querySelector("#score")
+    let Tablescore = document.querySelector("#tableScore")
     affichagequestion.setAttribute("style","display:none")
     affiFin.setAttribute("style","display:flex")
-    affiscore.innerHTML = `Vous avez obtenu un score de ${pointstotal} sur ${nbquestiondispo}`
+    affiscore.innerHTML = "Votre score est de : "+pointstotal+"/"+nbquestiondispo
+    afficherTableauHTML(ReponsesCorrectes,ReponsesChoisies)
+    function afficherTableauHTML(tableau,tableau2) {
+        // Création de l'élément <table>
+        let table = document.createElement('table');
+        let thead = document.createElement('thead');
+        table.appendChild(thead)
+        let th = document.createElement('th');
+        let tr = document.createElement('tr');
+        thead.appendChild(tr)
+        th.textContent = "Réponses correctes"
+        tr.appendChild(th)
+        let th2 = document.createElement('th');
+        th2.textContent = "Réponses choisies"
+        tr.appendChild(th2)
+        // Parcourir toutes les lignes du tableau
+        let tbody = document.createElement('tbody');
+        table.appendChild(tbody)
+        for (let i = 0; i < tableau.length; i++) {
+            // Création d'une nouvelle ligne <tr>
+            let tr = document.createElement('tr');
+
+                let td = document.createElement('td');
+                // Ajout du contenu de la cellule
+                td.textContent = tableau[i];
+                let td2 = document.createElement('td');
+                td2.textContent = tableau2[i];
+
+                // Ajout de la cellule à la ligne
+                tr.appendChild(td);
+                tr.appendChild(td2);
+            // Ajout de la ligne à la table
+            tbody.appendChild(tr);
+        }
+        // Ajout de la table au corps du document
+        affiscore.appendChild(table);
+    }
+
 
 }
 const restart = ()=>{
@@ -150,4 +207,7 @@ const desactiverBouton = () =>{
     boutonValider.style.backgroundColor = "grey"
     boutonValider.style.pointerEvents = "none"
 }
+
+
+
 

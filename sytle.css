@@ -193,3 +193,13 @@
     bottom: 0;
     cursor: pointer;
 }
+
+.table{
+    width: auto;
+    height: auto;
+
+}
+
+.table tr{
+    border: 1px solid black;
+}
