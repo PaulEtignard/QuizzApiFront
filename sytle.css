@@ -109,8 +109,8 @@
 .quizz{
     display: flex;
     position: relative;
-    height: 30%;
-    width: 30%;
+    height: 50%;
+    width: 50%;
     background-color: rgba(43,255,238,0.81);
     text-align: center;
     border-radius: 10px;
@@ -169,11 +169,13 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    margin-bottom: 200px;
 }
 
 .box{
-    width: 800px;
-    height: 300px;
+    width: 1000px;
+    height: 450px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -194,12 +196,18 @@
     cursor: pointer;
 }
 
-.table{
+#tableScore{
     width: auto;
     height: auto;
-
+    margin-top: 20px;
 }
 
-.table tr{
-    border: 1px solid black;
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 400px;
+    text-align: center;
 }

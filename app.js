@@ -157,6 +157,7 @@ const chargerFinQuizz =(pointstotal, nbquestiondispo) =>{
     affichagequestion.setAttribute("style","display:none")
     affiFin.setAttribute("style","display:flex")
     affiscore.innerHTML = "Votre score est de : "+pointstotal+"/"+nbquestiondispo
+
     afficherTableauHTML(ReponsesCorrectes,ReponsesChoisies)
     function afficherTableauHTML(tableau,tableau2) {
         // Création de l'élément <table>
